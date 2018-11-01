@@ -144,3 +144,12 @@ Other Types
   * decimal
   * guid
   
+  Option pour la creation de formulaire
+  The option "title" does not exist. Defined options are: 
+  "action", "allow_extra_fields", "attr", "auto_initialize", "block_name",
+  "by_reference", "compound", "constraints", "csrf_field_name", "csrf_message", 
+  "csrf_protection", "csrf_token_id", "csrf_token_manager", "data", "data_class",
+  "disabled", "empty_data", "error_bubbling", "error_mapping", "extra_fields_message",
+  "help", "inherit_data", "invalid_message", "invalid_message_parameters", "label", 
+  "label_attr", "label_format", "mapped", "method", "post_max_size_message", "property_path",
+  "required", "translation_domain", "trim", "upload_max_size_message", "validation_groups".
