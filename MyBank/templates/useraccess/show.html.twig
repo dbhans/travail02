@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Useraccess{% endblock %}
+
+{% block body %}
+    <h1>Useraccess</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ useraccess.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ useraccess.name }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ useraccess.password }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ useraccess.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('useraccess_index') }}">back to list</a>
+
+    <a href="{{ path('useraccess_edit', {'id': useraccess.id}) }}">edit</a>
+
+    {{ include('useraccess/_delete_form.html.twig') }}
+{% endblock %}

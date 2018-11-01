@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tranfers index{% endblock %}
+
+{% block body %}
+    <h1>Tranfers index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Transfer</th>
+                <th>Payer</th>
+                <th>Payee</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tranfer in tranfers %}
+            <tr>
+                <td>{{ tranfer.id }}</td>
+                <td>{{ tranfer.transfer }}</td>
+                <td>{{ tranfer.payer }}</td>
+                <td>{{ tranfer.payee }}</td>
+                <td>
+                    <a href="{{ path('tranfers_show', {'id': tranfer.id}) }}">show</a>
+                    <a href="{{ path('tranfers_edit', {'id': tranfer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tranfers_new') }}">Create new</a>
+{% endblock %}
