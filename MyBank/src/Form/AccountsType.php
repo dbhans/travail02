@@ -15,13 +15,15 @@ class AccountsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('account', TextType::class, array(
+            ->add('account', TexType::class, array(
                 'required'=> true,
-                'constraints' =>  array(new Length( array('min'=> 5, 'max'=>12)))
-            ) )
-            ->add('description')
+                'constraints' =>  array(new Length( array('min'=> 5, 'max'=>12)))))
+            ->add('description', TexType::class, array(
+                  'constraints' =>  array(new Length( array('max'=>255))) ))
             ->add('type')
-            ->add('customer')
+            ->add('customer', TexType::class, array(
+                'constraints' =>  array(new Length( array('max'=>2))
+          ) ))
         ;
     }
 
