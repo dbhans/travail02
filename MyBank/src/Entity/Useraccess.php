@@ -19,7 +19,7 @@ class Useraccess
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=15)
@@ -36,14 +36,14 @@ class Useraccess
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getUsername(): ?string
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName(string $name): self
+    public function setUsername(string $username): self
     {
-        $this->name = $name;
+        $this->name = $username;
 
         return $this;
     }
