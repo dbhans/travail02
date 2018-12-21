@@ -43,7 +43,7 @@ class Useraccess
 
     public function setUsername(string $username): self
     {
-        $this->name = $username;
+        $this->username = $username;
 
         return $this;
     }
