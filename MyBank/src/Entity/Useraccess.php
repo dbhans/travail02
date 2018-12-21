@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UseraccessRepository")
  */
@@ -70,5 +73,15 @@ class Useraccess
         $this->type = $type;
 
         return $this;
+    }
+    
+    // this if will verify if the user already exist in the database
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addConstraint(new UniqueEntity(array(
+            'fields'    => 'username',
+            'message'   => 'This username already exist in the database.',
+        )));
     }
 }
