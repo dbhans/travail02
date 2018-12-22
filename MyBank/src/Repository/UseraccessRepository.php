@@ -22,19 +22,19 @@ class UseraccessRepository extends ServiceEntityRepository
 //    /**
 //     * @return Useraccess[] Returns an array of Useraccess objects
 //     */
-    /*
-    public function findByExampleField($value)
+   
+    public function findByUsername($value)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+            ->andWhere('u.username = :val')
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+  
 
     /*
     public function findOneBySomeField($value): ?Useraccess

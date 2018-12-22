@@ -31,14 +31,20 @@ class UseraccessController extends AbstractController
         $useraccess = new Useraccess();
         $form = $this->createForm(UseraccessType::class, $useraccess);
         $form->handleRequest($request);
+     
+       
+            if ($form->isSubmitted() && $form->isValid()) {
+               //$val = $form['username']->getData();
+               
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($useraccess);
+                $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($useraccess);
-            $em->flush();
+                return $this->redirectToRoute('useraccess_index');
+            }
+        
 
-            return $this->redirectToRoute('useraccess_index');
-        }
+      
 
         return $this->render('useraccess/new.html.twig', [
             'useraccess' => $useraccess,
@@ -55,6 +61,7 @@ class UseraccessController extends AbstractController
     }
 
     /**
+     * 
      * @Route("/{id}/edit", name="useraccess_edit", methods="GET|POST")
      */
     public function edit(Request $request, Useraccess $useraccess): Response
