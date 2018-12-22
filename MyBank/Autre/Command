@@ -153,3 +153,6 @@ Other Types
   "help", "inherit_data", "invalid_message", "invalid_message_parameters", "label", 
   "label_attr", "label_format", "mapped", "method", "post_max_size_message", "property_path",
   "required", "translation_domain", "trim", "upload_max_size_message", "validation_groups".
+
+
+  php bin/console 
