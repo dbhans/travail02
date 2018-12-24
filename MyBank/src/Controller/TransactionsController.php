@@ -24,15 +24,41 @@ class TransactionsController extends AbstractController
     }
 
     /**
+     * @Route("/customer/{custom}", name="transactions_index_customer", methods="GET")
+     */
+    public function indexcustomer(TransactionsRepository $transactionsRepository,$custom): Response
+    {
+        return $this->render('transactions/index_customer.html.twig', ['transactions' => $transactionsRepository->findBycustomer($custom)]);
+    }
+
+    /**
+     * @Route("/account/{accout}", name="transactions_index_account", methods="GET")
+     */
+    public function indexaccount(TransactionsRepository $transactionsRepository, $accout): Response
+    {
+        return $this->render('transactions/index_account.html.twig', ['transactions' => $transactionsRepository->findByaccount($accout)]);
+    }
+    /**
      * @Route("/new", name="transactions_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request,TransactionsRepository $transactionsRepository): Response
     {
         $transaction = new Transactions();
         $form = $this->createForm(TransactionsType::class, $transaction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($transactionsRepository->find($form['amount']->getdata()) < 1)
+           {
+            $this->addFlash(
+                'notice',
+                'the amount shoud be greater than dollar doesn t exist'
+            );
+            return $this->render('transactions/new.html.twig', [
+                'transaction' => $transaction,
+                'form' => $form->createView(),
+            ]);
+           }
             $em = $this->getDoctrine()->getManager();
             $em->persist($transaction);
             $em->flush();

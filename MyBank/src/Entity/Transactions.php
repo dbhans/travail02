@@ -27,7 +27,7 @@ class Transactions
     private $amount;
 
     /**
-     * @ORM\Column(type="string", length=12)
+     * @ORM\Column(type="integer", length=12)
      */
     private $type;
 
@@ -80,12 +80,12 @@ class Transactions
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?int
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(int $type): self
     {
         $this->type = $type;
 

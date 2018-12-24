@@ -16,17 +16,17 @@ class TransactionsRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Description::class);
+        parent::__construct($registry, Transactions::class);
     }
 
 //    /**
 //     * @return Transactions[] Returns an array of Transactions objects
 //     */
-    /*
-    public function findByExampleField($value)
+   
+    public function findByaccount($value)
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
+            ->andWhere('d.account = :val')
             ->setParameter('val', $value)
             ->orderBy('d.id', 'ASC')
             ->setMaxResults(10)
@@ -34,8 +34,18 @@ class TransactionsRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
-
+    
+    public function findBycustomer($value)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.iduser = :val')
+            ->setParameter('val', $value)
+            ->orderBy('d.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     /*
     public function findOneBySomeField($value): ?Transactions
     {
