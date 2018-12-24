@@ -22,6 +22,16 @@ class AccountsRepository extends ServiceEntityRepository
 //    /**
 //     * @return Accounts[] Returns an array of Accounts objects
 //     */
+public function findByCustomer($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.customer = :val')
+            ->setParameter('val', $value)
+            ->orderBy('a.customer', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     /*
     public function findByExampleField($value)
     {

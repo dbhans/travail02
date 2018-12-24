@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\Required;
 use Symfony\Component\Validator\Constraints\Length;
@@ -25,10 +26,15 @@ class AccountsType extends AbstractType
                 'attr' => array('class' => 'description'),
                   'constraints' =>  array(new Length( array('max'=>255))) 
                   ))
-            ->add('type')
-            ->add('customer', TextType::class, array(
-                'constraints' =>  array(new Length( array('max'=>10))
-          ) ))
+            ->add('type',ChoiceType::class, array(
+                'choices'  => array(
+                    'Saving' => 'Saving',
+                    'Cheque' => 'Cheque'
+                )))
+            ->add('customer', null, array(
+                'constraints' =>  array(new Length( array('max'=>10))),
+                'label' => 'Customer Id'
+          ) )
         ;
     }
 

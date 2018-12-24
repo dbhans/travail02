@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 use Symfony\Component\Validator\Constraints\Length;
 
 class CustomersType extends AbstractType
@@ -46,7 +48,7 @@ class CustomersType extends AbstractType
                 'required'=> true,
                 'constraints' =>  array(new Length( array('min'=> 5, 'max'=>25)))
             ) )
-            ->add('pin',null, array(
+            ->add('pin', NumberType::class, array(
                 'required'=> true,
                 'constraints' =>  array(new Length( array('min'=> 1, 'max'=>5)))
             ))
@@ -54,7 +56,7 @@ class CustomersType extends AbstractType
                 'required'=> true,
                 'constraints' =>  array(new Length( array('min'=> 5, 'max'=>50)))
             ))
-            ->add('email',TextType::class, array(
+            ->add('email',EmailType::class, array(
                 'required'=> true,
                 'constraints' =>  array(new Length( array('min'=> 5, 'max'=>50)))
             ))

@@ -66,6 +66,11 @@ class Customers
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $createdby;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -187,6 +192,17 @@ class Customers
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+    public function getCreatedby(): ?int
+    {
+        return $this->createdby;
+    }
+
+    public function setCreatedby(int $createdby): self
+    {
+        $this->createdby = $createdby;
 
         return $this;
     }

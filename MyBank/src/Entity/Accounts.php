@@ -35,6 +35,10 @@ class Accounts
      * @ORM\Column(type="integer")
      */
     private $customer;
+      /**
+     * @ORM\Column(type="boolean")
+     */
+    //private $active;
 
     public function getId(): ?int
     {
@@ -88,4 +92,16 @@ class Accounts
 
         return $this;
     }
+    /*
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }*/
 }

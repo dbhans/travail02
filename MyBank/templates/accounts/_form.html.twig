@@ -1,4 +1,4 @@
-{{ form_start(form) }}
+{{ form_start(form, { 'attr': {'onsubmit':'return validateForm();'}}) }}
     {{ form_widget(form) }}
     {{ form_row(form.account,{'attr':{'title':'essais'}} )}}
 

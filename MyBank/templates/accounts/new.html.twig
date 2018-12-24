@@ -2,6 +2,20 @@
 
 {% block title %}New Accounts{% endblock %}
 
+{% block Javascript %}
+<script>
+    function validateForm() {
+        var x = document.forms["useraccess"]["useraccess[username]"].value;
+        if (x.length > 0) {
+          alert("Name must be filled out");
+          return false;
+        }
+      } 
+
+</script>
+{% endblock %}
+
+
 {% block body %}
     <h1>Create new Accounts</h1>
 
