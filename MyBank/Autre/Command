@@ -70,6 +70,8 @@ Available commands:
   php bin/console doctrine:schema:create                  Executes (or dumps) the SQL needed to generate the database schema
   php bin/console doctrine:schema:drop                    Executes (or dumps) the SQL needed to drop the current database schema
   php bin/console doctrine:schema:update                  Executes (or dumps) the SQL needed to update the database schema to match the current mapping metadata
+  php bin/console doctrine:schema:update --force          to execute the command
+  php bin/console doctrine:schema:update --dump-sql       to dump the SQL statements to the screen
   php bin/console doctrine:schema:validate                Validate the mapping files
  lint
   php bin/console lint:twig                               Lints a template and outputs encountered errors

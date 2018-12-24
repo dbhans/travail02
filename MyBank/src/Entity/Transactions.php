@@ -27,7 +27,7 @@ class Transactions
     private $amount;
 
     /**
-     * @ORM\Column(type="integer", length=12)
+     * @ORM\Column(type="binary", length=2)
      */
     private $type;
 
