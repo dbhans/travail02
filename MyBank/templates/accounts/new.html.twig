@@ -2,24 +2,22 @@
 
 {% block title %}New Accounts{% endblock %}
 
-{% block Javascript %}
-<script>
-    function validateForm() {
-        var x = document.forms["useraccess"]["useraccess[username]"].value;
-        if (x.length > 0) {
-          alert("Name must be filled out");
-          return false;
-        }
-      } 
 
-</script>
-{% endblock %}
 
 
 {% block body %}
-    <h1>Create new Accounts</h1>
+<div style=" 
+padding-left : 10%;
+padding-right : 10%;
+align-content: center;
+justify-content: center;"> 
+
+<h1> Create new Accounts</h1>
+   
 
     {{ include('accounts/_form.html.twig') }}
 
     <a href="{{ path('accounts_index') }}">back to list</a>
+</div>
+    
 {% endblock %}

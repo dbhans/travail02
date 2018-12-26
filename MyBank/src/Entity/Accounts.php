@@ -38,7 +38,7 @@ class Accounts
       /**
      * @ORM\Column(type="boolean")
      */
-    //private $active;
+    private $active;
 
     public function getId(): ?int
     {
@@ -92,7 +92,7 @@ class Accounts
 
         return $this;
     }
-    /*
+   
     public function getActive(): ?bool
     {
         return $this->active;
@@ -103,5 +103,5 @@ class Accounts
         $this->active = $active;
 
         return $this;
-    }*/
+    }
 }

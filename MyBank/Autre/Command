@@ -23,15 +23,15 @@ Available commands:
   php bin/console  assets:install                          Installs bundles web assets under a public directory
  cache
   php bin/console  cache:clear                             Clears the cache
-   php bin/console cache:pool:clear                        Clears cache pools
-   php bin/console cache:pool:delete                       Deletes an item from a cache pool
-   php bin/console cache:pool:prune                        Prunes cache pools
-   php bin/console cache:warmup                            Warms up an empty cache
+  php bin/console cache:pool:clear                        Clears cache pools
+  php bin/console cache:pool:delete                       Deletes an item from a cache pool
+  php bin/console cache:pool:prune                        Prunes cache pools
+  php bin/console cache:warmup                            Warms up an empty cache
  config
   php bin/console  config:dump-reference                   Dumps the default configuration for an extension
  debug
   php bin/console  debug:autowiring                        Lists classes/interfaces you can use for autowiring
-   php bin/console debug:config                            Dumps the current configuration for an extension
+  php bin/console debug:config                            Dumps the current configuration for an extension
   php bin/console debug:container                         Displays current services for an application
   php bin/console debug:event-dispatcher                  Displays configured listeners for an application
   php bin/console debug:form                              Displays form type information
@@ -86,14 +86,14 @@ Available commands:
   php bin/console make:fixtures                           Creates a new class to load Doctrine fixtures
   php bin/console make:form                               Creates a new form class
   php bin/console make:functional-test                    Creates a new functional test class
- php bin/console make :migration                          Creates a new migration based on database changes
- php bin/console make :serializer:encoder                 Creates a new serializer encoder class
- php bin/console make :subscriber                         Creates a new event subscriber class
- php bin/console make :twig-extension                     Creates a new Twig extension class
- php bin/console make :unit-test                          Creates a new unit test class
- php bin/console make :user                               Creates a new security user class
- php bin/console make :validator                          Creates a new validator and constraint class
- php bin/console make :voter                              Creates a new security voter class
+  php bin/console make :migration                          Creates a new migration based on database changes
+  php bin/console make :serializer:encoder                 Creates a new serializer encoder class
+  php bin/console make :subscriber                         Creates a new event subscriber class
+  php bin/console make :twig-extension                     Creates a new Twig extension class
+  php bin/console make :unit-test                          Creates a new unit test class
+  php bin/console make :user                               Creates a new security user class
+  php bin/console make :validator                          Creates a new validator and constraint class
+  php bin/console make :voter                              Creates a new security voter class
  router
   php bin/console router:match                            Helps debug routes by simulating a path info match
  security

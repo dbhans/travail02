@@ -42,7 +42,7 @@ class AccountsController extends AbstractController
            if ($customersRepository->find($form['customer']->getdata())== null)
            {
             $this->addFlash(
-                'notice',
+                'danger',
                 'this customer doesn t exist'
             );
             return $this->render('accounts/new.html.twig', [
@@ -51,6 +51,7 @@ class AccountsController extends AbstractController
             ]);
            }
             $em = $this->getDoctrine()->getManager();
+            $account->setActive(0);
             $em->persist($account);
             $em->flush();
 
@@ -63,31 +64,7 @@ class AccountsController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("/new/{id}", name="customer_accounts", methods="GET|POST")
-     */
-    public function newcust(Request $request, Customers $customer): Response
-    {
-        $account = new Accounts();
-        $form = $this->createForm(AccountsType::class, $account);
-        $form['customer']->setdata($customer->getId());
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-           
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($account);
-            $em->flush();
-
-            return $this->redirectToRoute('accounts_index');
-        }
-
-        return $this->render('accounts/new.html.twig', [
-            'account' => $account,
-            'form' => $form->createView(),
-        ]);
-    }
-
+    
     /**
      * @Route("/{id}", name="accounts_show", methods="GET")
      */
@@ -138,4 +115,31 @@ class AccountsController extends AbstractController
         return $this->render('accounts/balanceenquiry.html.twig', ['accounts' => $accountsRepository->findByCustomer($idcustomer)]);
            
     }
+
+    /**
+     * @Route("/account_client/{id}", name="customer_accounts", methods="GET|POST")
+     */
+    public function newcust(Request $request,  AccountsRepository $accountsRepository, $id): Response
+    {
+        $account = new Accounts();
+        $account->setCustomer($id);
+        $form = $this->createForm(AccountsType::class, $account);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+           
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($account);
+            $em->flush();
+
+            return $this->redirectToRoute('accounts_index');
+        }
+
+        return $this->render('accounts/newaccount.html.twig', [
+            'account' => $account,
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
