@@ -7,7 +7,7 @@
 
     {{ include('accounts/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('accounts_index') }}">back to list</a>
+    <a href="{{path('cust_accounts_index', {'customer': account.customer }) }}">back to list</a>
 
     {{ include('accounts/_delete_form.html.twig') }}
 {% endblock %}

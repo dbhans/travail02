@@ -3,41 +3,45 @@
 {% block title %}Customers index{% endblock %}
 
 {% block body %}
-    <h1>Customers index</h1>
-
+    <h1>list option</h1> <br>
+    <h4>Manager name </h4>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Lastname</th>
-                <th>Gender</th>
-                <th>Birth</th>
-                <th>Email</th>
-                <th>actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Manage</th>
+                    <th>actions</th>
+                
             </tr>
         </thead>
         <tbody>
         {% for customer in customers %}
+        {% if customer.createdby == manager %}
             <tr>
                 <td>{{ customer.id }}</td>
                 <td>{{ customer.name }}</td>
                 <td>{{ customer.lastname }}</td>
-                <td>{{ customer.gender }}</td>
-                <td>{{ customer.birth ? customer.birth|date('Y-m-d') : '' }}</td>
+                <td>{{ customer.gender }}</td>                
                 <td>{{ customer.email }}</td>
+                <td><a href="{{ path('cust_accounts_index', {'customer': customer.id}) }}">account</a></td>
                 <td>
                     <a href="{{ path('customers_show', {'id': customer.id}) }}">show</a>
                     <a href="{{ path('customers_edit', {'id': customer.id}) }}">edit</a>
                 </td>
             </tr>
+        {% endif %}
         {% else %}
             <tr>
                 <td colspan="12">no records found</td>
+                
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('customers_new') }}">Create new</a>
+    <a href="{{ path('manager_customers_new', {'manager': manager}) }}">Create new</a>
 {% endblock %}

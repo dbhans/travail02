@@ -36,7 +36,7 @@ class Accounts
      */
     private $customer;
       /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $active;
 

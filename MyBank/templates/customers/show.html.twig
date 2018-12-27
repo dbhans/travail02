@@ -51,10 +51,14 @@
                 <th>Email</th>
                 <td>{{ customer.email }}</td>
             </tr>
+            <tr>
+                <th>Mannager ID</th>
+                <td>{{ customer.createdby }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('customers_index') }}">back to list</a>
+    <a href="{{ path('customers_option', {'manager':customer.createdby}) }}">back to list</a>
 
     <a href="{{ path('customers_edit', {'id': customer.id}) }}">edit</a>
 

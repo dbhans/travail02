@@ -117,29 +117,40 @@ class AccountsController extends AbstractController
     }
 
     /**
-     * @Route("/account_client/{id}", name="customer_accounts", methods="GET|POST")
+     * @Route("/account_client/{customer}", name="customer_accounts", methods="GET|POST")
      */
-    public function newcust(Request $request,  AccountsRepository $accountsRepository, $id): Response
+    public function newcust(Request $request,  AccountsRepository $accountsRepository, $customer): Response
     {
         $account = new Accounts();
-        $account->setCustomer($id);
+        $account->setCustomer($customer);
         $form = $this->createForm(AccountsType::class, $account);
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-           
+            $account->setCustomer($customer);
+            $account->setActive(0);
             $em = $this->getDoctrine()->getManager();
             $em->persist($account);
             $em->flush();
 
-            return $this->redirectToRoute('accounts_index');
+            return $this->redirectToRoute('cust_accounts_index',[ 'customer'=>$customer]);
         }
 
         return $this->render('accounts/newaccount.html.twig', [
             'account' => $account,
             'form' => $form->createView(),
+            'customer'=> $customer
         ]);
     }
+
+     /**
+     * @Route("/index/{customer}", name="cust_accounts_index", methods="GET")
+     */
+    public function indexcust(AccountsRepository $accountsRepository,$customer): Response
+    {
+        return $this->render('accounts/index.html.twig', ['accounts' => $accountsRepository->findByCustomer($customer), 'customer'=>$customer]);
+    }
+
 
 }

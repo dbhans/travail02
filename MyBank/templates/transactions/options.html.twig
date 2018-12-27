@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transactions{% endblock %}
+
+{% block body %}
+    <h1>Transactions</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Transactions</th>
+                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Make</a></td>
+                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Show</a></td>
+            </tr>
+            <tr>
+                <th>Transfer</th>
+                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Make</a></td>
+                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Show</a></td>
+            </tr>
+            <tr>
+                <th>Mini Stament</th>
+                <td rowspan="2" ><a href="{{ path('transactions_edit', {'acc': acc}) }}">show</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('transactions_index') }}">back to list</a>
+
+
+{% endblock %}

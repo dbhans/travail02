@@ -87,4 +87,37 @@ class CustomersController extends AbstractController
 
         return $this->redirectToRoute('customers_index');
     }
+
+    /**
+     * @Route("/{manager}/option", name="customers_option")
+     */
+    public function index_option(CustomersRepository $customersRepository, $manager): Response
+    {
+        return $this->render('customers/option.html.twig', ['customers' => $customersRepository->findAll(),'manager'=>$manager]);
+    }
+
+     /**
+     * @Route("/new/{manager}", name="manager_customers_new", methods="GET|POST")
+     */
+    public function customernew(Request $request, CustomersRepository $customersRepository, $manager): Response
+    {
+        $customer = new Customers();
+        $form = $this->createForm(CustomersType::class, $customer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $customer->setCreatedby($manager);
+            $em->persist($customer);
+            $em->flush();
+
+        return $this->redirectToRoute('customers_option',['manager'=>$manager]);
+        }
+
+        return $this->render('customers/new.html.twig', [
+            'customer' => $customer,
+            'form' => $form->createView(),
+            'manager'=>$manager
+        ]);
+    }
 }

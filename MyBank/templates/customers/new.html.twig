@@ -7,5 +7,5 @@
 
     {{ include('customers/_form.html.twig') }}
 
-    <a href="{{ path('customers_index') }}">back to list</a>
+    <a href="{{ path('customers_option', {'manager' : manager}) }}">back to list</a>
 {% endblock %}

@@ -39,36 +39,38 @@ class TransactionsController extends AbstractController
         return $this->render('transactions/index_account.html.twig', ['transactions' => $transactionsRepository->findByaccount($accout)]);
     }
     /**
-     * @Route("/new", name="transactions_new", methods="GET|POST")
+     * @Route("/new/{accout}/{cust}", name="transactions_new", methods="GET|POST")
      */
-    public function new(Request $request,TransactionsRepository $transactionsRepository): Response
+    public function new(Request $request,TransactionsRepository $transactionsRepository, $accout): Response
     {
         $transaction = new Transactions();
         $form = $this->createForm(TransactionsType::class, $transaction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($transactionsRepository->find($form['amount']->getdata()) < 1)
+            if ($form['amount']->getdata() < 1)
            {
             $this->addFlash(
-                'notice',
+                'danger',
                 'the amount shoud be greater than dollar doesn t exist'
             );
             return $this->render('transactions/new.html.twig', [
                 'transaction' => $transaction,
                 'form' => $form->createView(),
+                'accout' => $accout
             ]);
            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($transaction);
             $em->flush();
 
-            return $this->redirectToRoute('transactions_index');
+            return $this->redirectToRoute('transactions_index',['accout' => $accout]);
         }
 
         return $this->render('transactions/new.html.twig', [
             'transaction' => $transaction,
             'form' => $form->createView(),
+            'accout' => $accout
         ]);
     }
 
@@ -112,5 +114,12 @@ class TransactionsController extends AbstractController
         }
 
         return $this->redirectToRoute('transactions_index');
+    }
+    /**
+     * @Route("/{acc}", name="tranfers_index", methods="GET")
+     */
+    public function option(): Response
+    {
+        return $this->render('transaction/options.html.twig', ['acc' => $acc]);
     }
 }

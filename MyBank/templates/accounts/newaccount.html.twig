@@ -13,7 +13,7 @@ align-content: center;
 justify-content: center;"> 
 
 <h1> Create new Accounts</h1>
-{{ form_start(form, { 'attr': {'onsubmit':'return validateForm();'}}) }}
+{{ form_start(form) }}
 
 <div class="form-group">
     {{ form_label(form.account) }}
@@ -36,7 +36,7 @@ justify-content: center;">
 <div class="form-group">
     {{ form_label(form.customer) }}
     {{ form_errors(form.customer) }}
-    {{ form_widget(form.customer,{'attr':{'title':'The account must exist','class':'form-control', 'disabled':'true'}} ) }}    
+    {{ form_widget(form.customer,{'attr':{'title':'The account must exist','class':'form-control'}} ) }}    
 </div>   
 
 <div class="form-group">
@@ -48,7 +48,7 @@ justify-content: center;">
 {{ form_end(form) }}
 
 
-    <a href="{{ path('accounts_index') }}">back to list</a>
+    <a href="{{ path('cust_accounts_index', {'customer': customer}) }}">back to list</a>
 </div>
     
 {% endblock %}
