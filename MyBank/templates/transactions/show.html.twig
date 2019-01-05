@@ -42,9 +42,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('transactions_index') }}">back to list</a>
+    <a href="{{ path('transactions_index',{'acc':acc}) }}">back to list</a>
 
-    <a href="{{ path('transactions_edit', {'id': transaction.id}) }}">edit</a>
+    <a href="{{ path('transactions_edit', {'id': transaction.id, 'acc':acc}) }}">edit</a>
 
     {{ include('transactions/_delete_form.html.twig') }}
 {% endblock %}

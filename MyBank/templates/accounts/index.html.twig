@@ -12,7 +12,7 @@
                 <th>Account</th>                
                 <th>Type</th>
                 <th>Customer ID</th>
-                <th>Description</th>
+                <th>Operation</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,7 +24,7 @@
                 <td>{{ account.account }}</td>                
                 <td>{{ account.type }}</td>
                 <td>{{ account.customer }}</td>
-                <td><a href="{{ path('accounts_show', {'id': account.id}) }}">show</a></td>
+                <td><a href="{{ path('transaction_option', {'acc': account.id,'cust': account.customer}) }}">choose</a></td>
                 <td>
                     <a href="{{ path('accounts_show', {'id': account.id}) }}">show</a>
                     <a href="{{ path('accounts_edit', {'id': account.id}) }}">edit</a>

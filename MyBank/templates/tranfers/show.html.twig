@@ -26,9 +26,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tranfers_index') }}">back to list</a>
+    <a href="{{ path('tranfers_index',{'acc':acc}) }}">back to list</a>
 
-    <a href="{{ path('tranfers_edit', {'id': tranfer.id}) }}">edit</a>
+    <a href="{{ path('tranfers_edit', {'id': tranfer.id, 'acc':acc}) }}">edit</a>
 
     {{ include('tranfers/_delete_form.html.twig') }}
 {% endblock %}

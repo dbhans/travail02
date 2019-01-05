@@ -16,32 +16,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class TransactionsController extends AbstractController
 {
     /**
-     * @Route("/", name="transactions_index", methods="GET")
+     * @Route("/{acc}/{cust}", name="transactions_index", methods="GET")
      */
-    public function index(TransactionsRepository $transactionsRepository): Response
+    public function index(TransactionsRepository $transactionsRepository,$acc,$cust): Response
     {
-        return $this->render('transactions/index.html.twig', ['transactions' => $transactionsRepository->findAll()]);
+        return $this->render('transactions/index.html.twig', ['transactions' => $transactionsRepository->findBycustomer($cust),'acc'=>$acc]);
     }
 
     /**
-     * @Route("/customer/{custom}", name="transactions_index_customer", methods="GET")
+     * @Route("/customer/{custom}/{acc}", name="transactions_index_customer", methods="GET")
      */
-    public function indexcustomer(TransactionsRepository $transactionsRepository,$custom): Response
+    public function indexcustomer(TransactionsRepository $transactionsRepository,$custom,$acc): Response
     {
-        return $this->render('transactions/index_customer.html.twig', ['transactions' => $transactionsRepository->findBycustomer($custom)]);
+        return $this->render('transactions/index_customer.html.twig', ['transactions' => $transactionsRepository->findByaccount($custom),'acc'=>$acc]);
     }
 
     /**
-     * @Route("/account/{accout}", name="transactions_index_account", methods="GET")
+     * @Route("/account/{acc}", name="transactions_index_account", methods="GET")
      */
-    public function indexaccount(TransactionsRepository $transactionsRepository, $accout): Response
+    public function indexaccount(TransactionsRepository $transactionsRepository, $acc): Response
     {
-        return $this->render('transactions/index_account.html.twig', ['transactions' => $transactionsRepository->findByaccount($accout)]);
+        return $this->render('transactions/index_account.html.twig', ['transactions' => $transactionsRepository->findByaccount($acc),'acc'=>$acc]);
     }
     /**
-     * @Route("/new/{accout}/{cust}", name="transactions_new", methods="GET|POST")
+     * @Route("/new/{acc}/{cust}", name="transactions_new", methods="GET|POST")
      */
-    public function new(Request $request,TransactionsRepository $transactionsRepository, $accout): Response
+    public function new(Request $request,TransactionsRepository $transactionsRepository, $acc, $cust): Response
     {
         $transaction = new Transactions();
         $form = $this->createForm(TransactionsType::class, $transaction);
@@ -57,35 +57,35 @@ class TransactionsController extends AbstractController
             return $this->render('transactions/new.html.twig', [
                 'transaction' => $transaction,
                 'form' => $form->createView(),
-                'accout' => $accout
+                'acc' => $acc
             ]);
            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($transaction);
             $em->flush();
 
-            return $this->redirectToRoute('transactions_index',['accout' => $accout]);
+            return $this->redirectToRoute('transactions_index',['accout' => $acc ,'acc'=>$acc]);
         }
 
         return $this->render('transactions/new.html.twig', [
             'transaction' => $transaction,
             'form' => $form->createView(),
-            'accout' => $accout
+            'acc' => $acc
         ]);
     }
 
     /**
-     * @Route("/{id}", name="transactions_show", methods="GET")
+     * @Route("/{id}/{acc}", name="transactions_show", methods="GET")
      */
-    public function show(Transactions $transaction): Response
+    public function show(Transactions $transaction,$acc): Response
     {
-        return $this->render('transactions/show.html.twig', ['transaction' => $transaction]);
+        return $this->render('transactions/show.html.twig', ['transaction' => $transaction,'acc'=>$acc]);
     }
 
     /**
-     * @Route("/{id}/edit", name="transactions_edit", methods="GET|POST")
+     * @Route("/{id}/edit/{acc}", name="transactions_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Transactions $transaction): Response
+    public function edit(Request $request, Transactions $transaction,$acc): Response
     {
         $form = $this->createForm(TransactionsType::class, $transaction);
         $form->handleRequest($request);
@@ -93,7 +93,7 @@ class TransactionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('transactions_edit', ['id' => $transaction->getId()]);
+            return $this->redirectToRoute('transactions_edit', ['id' => $transaction->getId(),'acc'=>$acc]);
         }
 
         return $this->render('transactions/edit.html.twig', [
@@ -103,9 +103,9 @@ class TransactionsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="transactions_delete", methods="DELETE")
+     * @Route("/{id}/{acc}", name="transactions_delete", methods="DELETE")
      */
-    public function delete(Request $request, Transactions $transaction): Response
+    public function delete(Request $request, Transactions $transaction,$acc): Response
     {
         if ($this->isCsrfTokenValid('delete'.$transaction->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
@@ -113,12 +113,12 @@ class TransactionsController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('transactions_index');
+        return $this->redirectToRoute('transactions_index',['acc'=>$acc]);
     }
     /**
-     * @Route("/{acc}", name="tranfers_index", methods="GET")
+     * @Route("/{acc}", name="transaction_option", methods="GET")
      */
-    public function option(): Response
+    public function option($acc): Response
     {
         return $this->render('transaction/options.html.twig', ['acc' => $acc]);
     }

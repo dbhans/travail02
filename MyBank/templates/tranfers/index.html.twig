@@ -23,8 +23,8 @@
                 <td>{{ tranfer.payer }}</td>
                 <td>{{ tranfer.payee }}</td>
                 <td>
-                    <a href="{{ path('tranfers_show', {'id': tranfer.id}) }}">show</a>
-                    <a href="{{ path('tranfers_edit', {'id': tranfer.id}) }}">edit</a>
+                    <a href="{{ path('tranfers_show', {'id': tranfer.id, 'acc':acc}) }}">show</a>
+                    <a href="{{ path('tranfers_edit', {'id': tranfer.id, 'acc':acc}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tranfers_new') }}">Create new</a>
+    <a href="{{ path('tranfers_new',{'acc':acc}) }}">Create new</a>
 {% endblock %}

@@ -16,17 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class TranfersController extends AbstractController
 {
     /**
-     * @Route("/", name="tranfers_index", methods="GET")
+     * @Route("/{acc}", name="tranfers_index", methods="GET")
      */
-    public function index(TranfersRepository $tranfersRepository): Response
+    public function index(TranfersRepository $tranfersRepository,$acc): Response
     {
-        return $this->render('tranfers/index.html.twig', ['tranfers' => $tranfersRepository->findAll()]);
+        return $this->render('tranfers/index.html.twig', ['tranfers' => $tranfersRepository->findAll(),'acc'=>$acc]);
     }
 
     /**
-     * @Route("/new", name="tranfers_new", methods="GET|POST")
+     * @Route("/new/{acc}", name="tranfers_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request,$acc): Response
     {
         $tranfer = new Tranfers();
         $form = $this->createForm(TranfersType::class, $tranfer);
@@ -37,27 +37,27 @@ class TranfersController extends AbstractController
             $em->persist($tranfer);
             $em->flush();
 
-            return $this->redirectToRoute('tranfers_index');
+            return $this->redirectToRoute('tranfers_index',['acc'=>$acc]);
         }
 
         return $this->render('tranfers/new.html.twig', [
             'tranfer' => $tranfer,
-            'form' => $form->createView(),
+            'form' => $form->createView(),'acc'=>$acc
         ]);
     }
 
     /**
-     * @Route("/{id}", name="tranfers_show", methods="GET")
+     * @Route("/{id}/{acc}", name="tranfers_show", methods="GET")
      */
-    public function show(Tranfers $tranfer): Response
+    public function show(Tranfers $tranfer,$acc): Response
     {
-        return $this->render('tranfers/show.html.twig', ['tranfer' => $tranfer]);
+        return $this->render('tranfers/show.html.twig', ['tranfer' => $tranfer,'acc'=>$acc]);
     }
 
     /**
-     * @Route("/{id}/edit", name="tranfers_edit", methods="GET|POST")
+     * @Route("/{id}/edit/{acc}", name="tranfers_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Tranfers $tranfer): Response
+    public function edit(Request $request, Tranfers $tranfer,$acc): Response
     {
         $form = $this->createForm(TranfersType::class, $tranfer);
         $form->handleRequest($request);
@@ -65,19 +65,19 @@ class TranfersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tranfers_edit', ['id' => $tranfer->getId()]);
+            return $this->redirectToRoute('tranfers_edit', ['id' => $tranfer->getId(),'acc'=>$acc]);
         }
 
         return $this->render('tranfers/edit.html.twig', [
             'tranfer' => $tranfer,
-            'form' => $form->createView(),
+            'form' => $form->createView(),'acc'=>$acc
         ]);
     }
 
     /**
-     * @Route("/{id}", name="tranfers_delete", methods="DELETE")
+     * @Route("/{id}/{acc}", name="tranfers_delete", methods="DELETE")
      */
-    public function delete(Request $request, Tranfers $tranfer): Response
+    public function delete(Request $request, Tranfers $tranfer,$acc): Response
     {
         if ($this->isCsrfTokenValid('delete'.$tranfer->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
@@ -85,7 +85,7 @@ class TranfersController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('tranfers_index');
+        return $this->redirectToRoute('tranfers_index',['acc'=>$acc]);
     }
 
 
