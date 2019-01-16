@@ -20,7 +20,7 @@ class TransactionsController extends AbstractController
      */
     public function index(TransactionsRepository $transactionsRepository,$acc,$cust): Response
     {
-        return $this->render('transactions/index.html.twig', ['transactions' => $transactionsRepository->findBycustomer($cust),'acc'=>$acc]);
+        return $this->render('transactions/index.html.twig', ['transactions' => $transactionsRepository->findBycustomer($cust),'acc'=>$acc,'cust'=>$cust]);
     }
 
     /**
@@ -57,20 +57,23 @@ class TransactionsController extends AbstractController
             return $this->render('transactions/new.html.twig', [
                 'transaction' => $transaction,
                 'form' => $form->createView(),
-                'acc' => $acc
+                'acc' => $acc,
+                'cust' => $cust
             ]);
            }
             $em = $this->getDoctrine()->getManager();
+            $transaction->setTransfer(0);
             $em->persist($transaction);
             $em->flush();
 
-            return $this->redirectToRoute('transactions_index',['accout' => $acc ,'acc'=>$acc]);
+            return $this->redirectToRoute('transactions_index',['cust' => $cust,'acc'=>$acc]);
         }
 
         return $this->render('transactions/new.html.twig', [
             'transaction' => $transaction,
             'form' => $form->createView(),
-            'acc' => $acc
+            'acc' => $acc,
+            'cust' => $cust
         ]);
     }
 
@@ -99,6 +102,7 @@ class TransactionsController extends AbstractController
         return $this->render('transactions/edit.html.twig', [
             'transaction' => $transaction,
             'form' => $form->createView(),
+            
         ]);
     }
 
@@ -116,10 +120,10 @@ class TransactionsController extends AbstractController
         return $this->redirectToRoute('transactions_index',['acc'=>$acc]);
     }
     /**
-     * @Route("/{acc}", name="transaction_option", methods="GET")
+     * @Route("/options/{acc}/{cust}", name="transaction_option", methods="GET")
      */
-    public function option($acc): Response
+    public function option($acc, $cust): Response
     {
-        return $this->render('transaction/options.html.twig', ['acc' => $acc]);
+        return $this->render('transactions/options.html.twig', ['acc' => $acc, 'cust' => $cust]);
     }
 }

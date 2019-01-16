@@ -31,7 +31,7 @@ class TransactionsType extends AbstractType
             ->add('type',ChoiceType::class, array(
                 'choices'  => array(
                     'Deposit' => 'Deposit',
-                    'Withdra1wal' => 'Withdra1wal'
+                    'Withdraw' => 'Withdraw'
                 )))
             ->add('date', DateType::class, array(
                 'required'=> true,

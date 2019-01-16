@@ -9,17 +9,18 @@
         <tbody>
             <tr>
                 <th>Transactions</th>
-                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Make</a></td>
-                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Show</a></td>
+                <td><a href="{{ path('transactions_new', {'acc': acc, 'cust': cust}) }}">Make</a></td>
+                <td><a href="{{ path('transactions_index', {'acc': acc, 'cust': cust}) }}">Show list</a></td>
             </tr>
             <tr>
                 <th>Transfer</th>
-                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Make</a></td>
-                <td><a href="{{ path('transactions_edit', {'acc': acc}) }}">Show</a></td>
+                <td><a href="{{ path('tranfers_new', {'acc': acc}) }}">Make</a></td>
+                <td><a href="{{ path('tranfers_index', {'acc': acc}) }}">Show list</a></td>
             </tr>
             <tr>
                 <th>Mini Stament</th>
-                <td rowspan="2" ><a href="{{ path('transactions_edit', {'acc': acc}) }}">show</a></td>
+                <td rowspan="2"><a href="{{ path('transactions_new', {'acc': acc, 'cust': cust}) }}">show</a></td>
+                <td></td>
             </tr>
         </tbody>
     </table>

@@ -1,4 +1,7 @@
-accounts_index                GET        ANY      ANY    /accounts/
+ ----------------------------- ---------- -------- ------ ---------------------------------------
+  Name                          Method     Scheme   Host   Path
+ ----------------------------- ---------- -------- ------ ---------------------------------------
+  accounts_index                GET        ANY      ANY    /accounts/
   accounts_new                  GET|POST   ANY      ANY    /accounts/new
   accounts_show                 GET        ANY      ANY    /accounts/{id}
   accounts_edit                 GET|POST   ANY      ANY    /accounts/{id}/edit
@@ -30,7 +33,7 @@ accounts_index                GET        ANY      ANY    /accounts/
   transactions_show             GET        ANY      ANY    /transactions/{id}/{acc}
   transactions_edit             GET|POST   ANY      ANY    /transactions/{id}/edit/{acc}
   transactions_delete           DELETE     ANY      ANY    /transactions/{id}/{acc}
-  transaction_option            GET        ANY      ANY    /transactions/{acc}
+  transaction_option            GET        ANY      ANY    /transactions/options/{acc}/{cust}
   useraccess_index              GET        ANY      ANY    /useraccess/
   useraccess_new                GET|POST   ANY      ANY    /useraccess/new
   useraccess_show               GET        ANY      ANY    /useraccess/{id}

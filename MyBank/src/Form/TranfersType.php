@@ -7,15 +7,29 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Required;
+use Symfony\Component\Validator\Constraints\Length;
 
 class TranfersType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('transfer')
-            ->add('payer')
-            ->add('payee')
+            ->add('transfer', null, array(
+                'required'=> true,
+                'constraints' =>  array(new Length( array('max'=>10))),
+                'label' => 'Transfer Amount  '
+          ) )
+            ->add('payer', null, array(
+                'required'=> true,
+                'constraints' =>  array(new Length( array('max'=>10))),
+                'label' => 'Payer'
+          ) )
+            ->add('payee', null, array(
+                'required'=> true,
+                'constraints' =>  array(new Length( array('max'=>10))),
+                'label' => 'Payee'
+          ) )
         ;
     }
 

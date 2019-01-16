@@ -7,5 +7,5 @@
 
     {{ include('transactions/_form.html.twig') }}
 
-    <a href="{{ path('transactions_index',{ 'acc':acc}) }}">back to list</a>
+    <a href="{{ path('transactions_index',{ 'acc':acc,'cust':cust}) }}">back to list</a>
 {% endblock %}
