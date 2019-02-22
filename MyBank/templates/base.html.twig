@@ -25,36 +25,41 @@
             {% endif %}
             <!--<a class="btn btn-outline-primary" href="#">Sign up</a> --> 
           </div>
-            <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            
                 
-                    <main role="main" class="inner cover">
-                        <div class="container-fluid">
-                          <div class="row">
+                    <main role="main" class="container-fluid">
+                        
+                        <div class="row">
+                            <div class="col">
 
-                            <div class="messages">
-                                    {% for type, messages in app.flashes %}
-                                        {% for message in messages %}
-                                            {# Bootstrap alert, see http://getbootstrap.com/components/#alerts #}
-                                            <div class="alert alert-dismissible alert-{{ type }}" role="alert">
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                
-                                                {{ message|trans }}
-                                            </div>
+                            </div>
+                            <div class="col">
+                                <div class="messages">
+                                        {% for type, messages in app.flashes %}
+                                            {% for message in messages %}
+                                                {# Bootstrap alert, see http://getbootstrap.com/components/#alerts #}
+                                                <div class="alert alert-dismissible alert-{{ type }}" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                    
+                                                    {{ message|trans }}
+                                                </div>
+                                            {% endfor %}
                                         {% endfor %}
-                                    {% endfor %}
-                            </div> 
-                            {% block body %}{% endblock %}
+                                </div> 
+                                {% block body %}{% endblock %}
                             </div>
                         
-                           
-                          </div>
-                        </div>
+                            <div class="col">
+
+                            </div>
+
+                        </div>                 
                         
                     </main>
                 
-            </div>
+            
         {% block javascripts %}{% endblock %}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

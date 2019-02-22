@@ -3,8 +3,9 @@
 {% block title %}Manager index{% endblock %}
 
 {% block body %}
-    <h1>Manager index</h1>
 
+   <div class="row" >
+    <h1>Manager index</h1>
     <table class="table">
         <thead>
             <tr>
@@ -36,6 +37,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('manager_new') }}">Create new</a>
+</div>
+<div class="row" > <a href="{{ path('manager_new') }}">Create new</a> </div>
+   
 {% endblock %}

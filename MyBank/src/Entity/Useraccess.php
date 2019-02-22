@@ -108,7 +108,7 @@ class Useraccess implements UserInterface, \Serializable
      *
      * @param array $roles
      *
-     * @return UserControl
+     * 
      */
     public function setRoles(array $roles)
     {

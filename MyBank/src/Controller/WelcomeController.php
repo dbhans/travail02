@@ -18,7 +18,8 @@ class WelcomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('Welcome/index.html.twig');
+        return $this->redirectToRoute('manager_index');
+        //return $this->render('Welcome/index.html.twig');
     }
 
 
